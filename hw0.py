@@ -1,1 +1,0 @@
-print("Hello CSE143")
