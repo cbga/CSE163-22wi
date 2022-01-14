@@ -21,9 +21,9 @@ def test_total():
     """
     Test the method total(n) in hw0.py
     """
-    # The regular case
     assert_equals(15, hw0.total(5))
-    # Seems likely we could mess up 0 or 1
+    assert_equals(6, hw0.total(3))
+    assert_equals(21, hw0.total(6))
     assert_equals(1, hw0.total(1))
     assert_equals(0, hw0.total(0))
 
