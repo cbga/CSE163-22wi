@@ -14,10 +14,12 @@ def total(n):
 
 # Write your functions here!
 def count_divisible_digits(n, m):
+    if m == 0:
+        return 0
     if n <= 0:
         return 1
     count = 0
-    while n >= 0:
+    while n > 0:
         num = n % 10
         if num % m == 0 or num == 0:
             count += 1
@@ -62,24 +64,19 @@ def reformat_date(date, current, target):
 
 
 def longest_word(file_name):
-    dic = {}
-    max_val = 0
+    line_num = 0
+    max_line = 0
+    longest_word = ''
     with open(file_name) as f:
-        lines = f.readlines()
-        if len(lines) == 0:
-            return None
-        for line in lines:
+        for line in f.readlines():
+            line_num += 1
             for word in line.split():
-                if word in dic:
-                    dic[word.lower()] += 1
-                else:
-                    dic[word.lower()] = 1
-                    first = word
-                if dic[word.lower()] >= max_val:
-                    max_val = dic[word.lower()]
-                    max_word = first
-
-    return str(max_val) + ': ' + max_word
+                if len(word) > len(longest_word):
+                    max_line = line_num
+                    longest_word = word
+    if longest_word == '':
+        return None
+    return str(max_line) + ': ' + longest_word
 
 
 def get_average_in_range(li, low, high):
