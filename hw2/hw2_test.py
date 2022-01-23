@@ -10,6 +10,15 @@ import hw2_pandas
 SPEC_TEST_FILE = "/home/pokemon_test.csv"
 
 # Your tests here!
+def test_data(data):
+    print('Number of species:', hw2_manual.species_count(data))
+    print('Highest level pokemon:', hw2_manual.max_level(data))
+    print('Low-level Pokemon:', hw2_manual.filter_range(data, 1, 9))
+    print('Average attack for fire types:', hw2_manual.mean_attack_for_type(data, 'fire'))
+    print('Count of each Pokemon type:')
+    print(hw2_manual.count_types(data))
+    print('Average attack for each Pokemon type:')
+    print(hw2_manual.mean_attack_per_type(data))
 
 
 def main():
