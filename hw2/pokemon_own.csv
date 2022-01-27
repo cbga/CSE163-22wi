@@ -1,0 +1,16 @@
+id,name,level,personality,type,weakness,atk,def,hp,stage
+53,Persian,40,mild,normal,fighting,104,116,147,2
+35,Clefairy,67,sassy,fairy,poison,92,123,137,1
+121,Starmie,67,sassy,water,electric,174,56,113,2
+113,Chansey,78,brave,normal,fighting,37,99,167,1
+92,Gastly,77,rash,ghost,dark,54,139,29,1
+73,Arcanine,87,serious,water,electric,60,170,133,2
+12,Butterfree,8,impish,flying,fire,44,114,135,3
+6,Charizard,55,timid,fire,water,110,66,71,3
+125,Electabuzz,37,hardy,electric,ground,64,62,158,1
+61,Poliwhirl,26,hardy,water,electric,85,43,197,2
+57,Primeape,51,adamant,fighting,flying,200,106,123,2
+106,Hitmonlee,29,careful,fighting,flying,79,126,34,1
+59,Arcanine,5,hardy,fire,water,159,173,74,2
+131,Lapras,72,lax,water,electric,107,113,29,1
+120,Staryu,73,hardy,water,electric,30,91,158,1
