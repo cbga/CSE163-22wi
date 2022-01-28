@@ -23,6 +23,7 @@ def count_divisible_digits(n, m):
     """
     Returns the number of digits in "n" that are divisible by "m"
     (0 <= m <= 10).
+    If m = 0, returns 0.
     """
     if m == 0:
         return 0
@@ -50,7 +51,8 @@ def is_relatively_prime(n, m):
 def travel(direction, x, y):
     """
     Returns a tuple indicating the new position after following the
-    "direction" starting from "x", "y".
+    "direction" starting from "x", "y". (case-insensative)
+    Any character that doesn't indicate valid direction will be ignored.
     """
     x_new = x
     y_new = y
@@ -72,16 +74,16 @@ def reformat_date(date, current, target):
     Returns a new string with the "date" formatted in the "target" format
     from the "current" format.
     """
+    result = ''
     date_list = date.split('/')
     current_list = current.split('/')
     target_list = target.split('/')
-    result_list = []
     dic = {}
     for i in range(len(date_list)):
         dic[current_list[i]] = date_list[i]
-    for name in target_list:
-        result_list.append(dic[name])
-    return '/'.join(result_list)
+    for j in range(len(target_list) - 1):
+        result += dic[target_list[j]] + '/'
+    return result + dic[target_list[-1]]
 
 
 def longest_word(file_name):
@@ -89,6 +91,8 @@ def longest_word(file_name):
     Returns the longest word in the file ("file_name") with which
     line it appears on.
     If the file is empty or there are no words in the file, returns None.
+    If there are ties for the longest word, it returns the one that
+    appears first in the file.
     """
     line_num = 0
     max_line = 0
@@ -125,25 +129,20 @@ def get_average_in_range(li, low, high):
 def mode_digit(n):
     """
     Returns the digit that appears most frequently in the number "n".
+    Returns the digit with the great value if there is a tie of most
+    frequent digits.
     """
-    if n == 0:
-        return 0
     n = abs(n)
-    m = n
-    unique = set()
+    dic = {}
+    result = 0
     while n > 0:
         num = n % 10
-        unique.add(num)
+        if num in dic:
+            dic[num] += 1
+        else:
+            dic[num] = 1
         n = n // 10
-    dic = {}
-    for i in unique:
-        dic[i] = 0
-    while m > 0:
-        num = m % 10
-        dic[num] += 1
-        m = m // 10
-    keys = []
-    for key in dic:
-        if dic[key] == max(dic.values()):
-            keys.append(key)
-    return max(keys)
+    for i in dic:
+        if dic[i] == max(dic.values()) and i >= result:
+            result = i
+    return result
