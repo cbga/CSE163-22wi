@@ -1,3 +1,7 @@
+"""
+Bingan Chen (AA)
+Implements all functions required for hw3: Education
+"""
 import pandas as pd
 import seaborn as sns
 
@@ -12,15 +16,25 @@ from sklearn.model_selection import train_test_split
 sns.set()
 
 
-# Define your functions here
 def compare_bachelors_1980(data):
+    """
+    :param data: A DataFrame of the desired csv
+    :return: A 2-by-2 DataFrame with rows corresponding to men and women
+             and columns corresponding to Sex and Total.
+    """
     df = data[data['Sex'] != 'A']
     after_mask = df[(df['Year'] == 1980) & (df['Min degree'] == 'bachelor\'s')]
     result = after_mask[['Sex', 'Total']]
     return result
 
 
-def top_2_2000s(data, sex):
+def top_2_2000s(data, sex='A'):
+    """
+    :param data: A DataFrame of the desired csv file.
+    :param sex: Specified sex. Default to 'A' if no sex parameter is specified
+    :return: A 2-element Series, comparing mean educational attainment levels in
+             specified sex.
+    """
     mask = (2000 <= data['Year']) & (data['Sex'] == sex) & (data['Year'] <= 2010)
     df = data[mask]
     grouped = df.groupby('Min degree')['Total'].mean()
@@ -28,14 +42,26 @@ def top_2_2000s(data, sex):
 
 
 def line_plot_bachelors(data):
+    """
+    :param data: A DataFrame of the desired csv file.
+    :return: None
+    Save a figure named as line_plot_bachelors showing a line chart of the total
+        percentages of all people Sex A with bachelor's Min degree over time.
+    """
     data = data[(data['Sex'] == 'A') & (data['Min degree'] == 'bachelor\'s')]
     sns.relplot(data=data, x='Year', y='Total', kind='line')
     plt.ylabel('Percentage')
-    plt.title('Percentage Earning Bachelor’s over Time')
+    plt.title('Percentage Earning Bachelor\'s over Time')
     plt.savefig('line_plot_bachelors.png', bbox_inches='tight')
 
 
 def bar_chart_high_school(data):
+    """
+    :param data: A DataFrame of the desired csv file.
+    :return: None
+    Save a figure named as bar_chart_high_school comparing the total percentages
+        of Sex F, M, and A with high school Min degree in the Year 2009.
+    """
     data = data[(data['Year'] == 2009) & (data['Min degree'] == 'high school')]
     sns.catplot(data=data, x='Sex', y='Total', kind='bar', ci=None)
     plt.ylabel('Percentage')
@@ -44,6 +70,13 @@ def bar_chart_high_school(data):
 
 
 def plot_hispanic_min_degree(data):
+    """
+    :param data: A DataFrame of the desired csv file.
+    :return: None
+    Save a figure named as plot_hispanic_min_degree that shows how the percentage
+        of Hispanic people with degrees have changed between 1990–2010
+        (inclusive) for high school and bachelor's min degree.
+    """
     mask1 = (data['Year'] >= 1990) & (data['Year'] <= 2010)
     mask2 = (data['Min degree'] == 'bachelor\'s') | (data['Min degree'] == 'high school')
     mask3 = data['Hispanic'] != 'NaN'
@@ -55,6 +88,11 @@ def plot_hispanic_min_degree(data):
 
 
 def fit_and_predict_degrees(data):
+    """
+    :param data: A DataFrame of the desired csv file.
+    :return: the test mean squared error as a float based on predicted the percentage
+        of Sex to achieve the Min degree in a given Year.
+    """
     data = data[['Year', 'Min degree', 'Sex', 'Total']]
     data = data.dropna()
     features = pd.get_dummies(data.loc[:, data.columns != 'Total'])
@@ -76,7 +114,7 @@ def main():
     line_plot_bachelors(data)
     bar_chart_high_school(data)
     plot_hispanic_min_degree(data)
-    print(fit_and_predict_degrees(data))
+    fit_and_predict_degrees(data)
 
 
 if __name__ == '__main__':
