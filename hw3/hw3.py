@@ -110,7 +110,7 @@ def main():
     data = pd.read_csv('nces-ed-attainment.csv', na_values=['---'])
     # Call your functions here
     compare_bachelors_1980(data)
-    top_2_2000s(data, 'A')
+    top_2_2000s(data)
     line_plot_bachelors(data)
     bar_chart_high_school(data)
     plot_hispanic_min_degree(data)
