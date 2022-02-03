@@ -15,4 +15,4 @@ The bias may occur based on the different **races**. If the dataset didn't cover
 
 ## 4. Describe an application, analysis, or decision motivated by this dataset with the intended goal of improving educational equity but that ultimately exacerbates social injustice.
 
-
+Apparently, some current policies import the percentage of people gained bachelor degrees. To be more "equal", the government may still use the same regulations to enhance this goal and try to let most of the people gain bachelor degree ultimately. However, the resources are always limited. All people have a bachelor degree will mostly reduce the credibility of this degree. In this case, when the people having the same degree increase, a new criteria to distinguish people should be created in order to improve justice. If the government still use this dataset and don't think about the real situation, the homogeneity of regulation will eventually exacerbate social injustice.
