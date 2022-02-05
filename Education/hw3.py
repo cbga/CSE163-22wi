@@ -79,7 +79,8 @@ def plot_hispanic_min_degree(data):
     mask1 = (data['Year'] >= 1990) & (data['Year'] <= 2010)
     mask2 = (data['Min degree'] == 'bachelor\'s') | (data['Min degree'] == 'high school')
     mask3 = data['Hispanic'] != 'NaN'
-    data = data[mask1 & mask2 & mask3]
+    mask4 = data['Sex'] == 'A'
+    data = data[mask1 & mask2 & mask3 & mask4]
     sns.relplot(data=data, x='Year', y='Total', kind='line', hue='Min degree')
     plt.ylabel('Percentage')
     plt.title('Percentage Hispanic People With Degree over Time')
