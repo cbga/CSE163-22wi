@@ -4,7 +4,7 @@ from os.path import basename
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import parse_qs, urljoin, unquote
 
-CORPUS_PATH = "/course/small_wiki/"
+CORPUS_PATH = "/course/self_some_docs/"
 
 
 def title(path):
