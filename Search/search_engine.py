@@ -39,22 +39,17 @@ class SearchEngine:
             term = term.lower()
             term = re.sub(r'\W+', '', term)
             if term not in self._inverted_index:
-                return []
-            idf = self._calculate_idf(term)
-            for single_doc in self._inverted_index[term]:
-                tf = single_doc.term_frequency(term)
-                tfidf = idf * tf
-                single_path = single_doc.get_path()
-                if single_path not in result_dic:
-                    result_dic[single_path] = 0
-                result_dic[single_path] += tfidf
-        after_sort = sorted(
-            result_dic.items(), key=lambda item: item[1], reverse=True
-            )
-
+                idf = self._calculate_idf(term)
+                for single_doc in self._inverted_index[term]:
+                    tf = single_doc.term_frequency(term)
+                    tfidf = idf * tf
+                    single_path = single_doc.get_path()
+                    if single_path not in result_dic:
+                        result_dic[single_path] = 0
+                    result_dic[single_path] += tfidf
+            after_sort = sorted(
+                result_dic.items(), key=lambda item: item[1], reverse=True
+                )
         for d in after_sort:
             result.append(d[0])
         return result
-
-    def get_map(self):
-        return self._inverted_index

@@ -1,5 +1,4 @@
 from cse163_utils import assert_equals
-
 from document import Document
 from search_engine import SearchEngine
 
@@ -17,12 +16,14 @@ def test_document():
 
 def test_search_engine():
     engine = SearchEngine('self_some_docs/')
+    engine2 = SearchEngine('provided/')
     assert_equals(['self_some_docs/doc1.txt'], engine.search('apples'))
     assert_equals([], engine.search('pineapples'))
     assert_equals(['self_some_docs/doc2.txt', 'self_some_docs/doc1.txt'], engine.search('are fresh'))
     assert_equals([], engine.search(' ! pineapples apples'))
 
-    print(engine.get_map())
+    assert_equals(['provided/doc3p.txt', 'provided/doc1p.txt'], engine2.search('love dogs'))
+    # print(engine2.get_map())
 
 
 def main():
