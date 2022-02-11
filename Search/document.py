@@ -1,17 +1,22 @@
 """
 Bingan Chen (AA)
 Implements the class Document with functions included for hw4.
+This file constructs a class representing a single file, get the term
+frequency of a term, get the path of this file, the unique words in
+the doc.
 """
 import re
 
 
 class Document:
     """
-        This is comments (not finished)
+    This class represents the data in a single web page and includes
+    methods to compute term frequency.
     """
     def __init__(self, doc_path):
         """
-        This is comments (not finished)
+        Initialize a document's data by taking a path of the document.
+        :param doc_path: the path of a specific document.
         """
         self._file_path = doc_path
         self._dic = {}
@@ -30,7 +35,9 @@ class Document:
 
     def term_frequency(self, term):
         """
-        This is comments (not finished)
+        :param term: A given term to be computed for TF.
+        :return: The term frequency of the specified term; If term does
+        not appear in the document, returns 0.
         """
         term = term.lower()
         term = re.sub(r'\W+', '', term)
@@ -40,12 +47,12 @@ class Document:
 
     def get_path(self):
         """
-        This is comments (not finished)
+        :return: The path of this document.
         """
         return self._file_path
 
     def get_words(self):
         """
-        This is comments (not finished)
+        :return: A list of unique normalized words in this doc.
         """
         return list(self._dic.keys())
