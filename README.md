@@ -8,7 +8,7 @@ Assessment details can be found on course website.
 - [x] [Assessment 1](/Primer): Apply control structures and data structures to solve problems involving numbers, text, and files.
 - [x] [Assessment 2](/Pokemon): Read, process, and group CSV data to compute descriptive statistics with and without Pandas.
 - [x] [Assessment 3](/Education): Apply Pandas, Seaborn, and Scikit-learn to process, visualize, and predict outcomes about data.
-- [ ] Assessment 4
+- [x] [Assessment 4](/Search): Implement specialized data types with Python classes for tf-idf information retrieval.
 - [ ] Assessment 5
 
 ## Project 
