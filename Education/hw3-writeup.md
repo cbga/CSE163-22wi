@@ -11,7 +11,7 @@ Because it can show the difference between two kinds of min degrees of Hispanic 
 
 ## 3. Describe a possible bias present in this dataset and why it might have occurred.
 
-The bias may occur based on the different **races**. If the dataset didn't cover the races properly, the prediction will be biased.
+While collecting this dataset, all min degree starts at high school, it is apparent that the choices starts at that level. However, in past decades, although some developed countries can afford a solid education system providing an at least high school education, there is still a great amount of people, especially the minority like hispanic people, have a min degree under that level. So if there is no category about the educational level lower than high school, a bias may have occurred because of this incomprehension skewing the result. Specifically, the people with lower education level than high school may fake the result with higher education than they actually got. 
 
 ## 4. Describe an application, analysis, or decision motivated by this dataset with the intended goal of improving educational equity but that ultimately exacerbates social injustice.
 

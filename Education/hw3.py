@@ -1,11 +1,19 @@
 """
 Bingan Chen (AA)
-Implements all functions required for hw3: Education
+Implements all functions required for hw3: Education. In this file,
+the client can ask for comparing the bachelors degree from genders
+in 1980, getting the 2 most commonly-awarded levels of educational
+attainment awarded between 2000–2010 (inclusive) for a given sex,
+plotting a line chart of the total percentages of all people with
+a min bachelor degree, plotting the total percentages of different
+genders with min high school degree, how the percentage of Hispanic
+people with degrees have changed between 1990–2010 (inclusive) for
+high school and bachelor's Min degree, and predicting the percentage
+of Sex to achieve the Min degree in a given year based on the dataset
+nces-ed-attainment.csv.
 """
 import pandas as pd
 import seaborn as sns
-
-# Your imports here
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
@@ -78,10 +86,9 @@ def plot_hispanic_min_degree(data):
     """
     mask1 = (data['Year'] >= 1990) & (data['Year'] <= 2010)
     mask2 = (data['Min degree'] == 'bachelor\'s') | (data['Min degree'] == 'high school')
-    mask3 = data['Hispanic'] != 'NaN'
     mask4 = data['Sex'] == 'A'
-    data = data[mask1 & mask2 & mask3 & mask4]
-    sns.relplot(data=data, x='Year', y='Total', kind='line', hue='Min degree')
+    data = data[mask1 & mask2 & mask4]
+    sns.relplot(data=data, x='Year', y='Hispanic', kind='line', hue='Min degree')
     plt.ylabel('Percentage')
     plt.title('Percentage Hispanic People With Degree over Time')
     plt.savefig('plot_hispanic_min_degree.png', bbox_inches='tight')
@@ -108,7 +115,6 @@ def fit_and_predict_degrees(data):
 
 def main():
     data = pd.read_csv('nces-ed-attainment.csv', na_values=['---'])
-    # Call your functions here
     compare_bachelors_1980(data)
     top_2_2000s(data)
     line_plot_bachelors(data)
