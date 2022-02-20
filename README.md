@@ -9,6 +9,6 @@ Assessment details can be found on course website.
 - [x] [Assessment 2](/Pokemon): Read, process, and group CSV data to compute descriptive statistics with and without Pandas.
 - [x] [Assessment 3](/Education): Apply Pandas, Seaborn, and Scikit-learn to process, visualize, and predict outcomes about data.
 - [x] [Assessment 4](/Search): Implement specialized data types with Python classes for tf-idf information retrieval.
-- [ ] Assessment 5
+- [x] [Assessment 5](/Mapping): Analyze and plot geospatial data to investigate food deserts in Washington.
 
 ## Project 
