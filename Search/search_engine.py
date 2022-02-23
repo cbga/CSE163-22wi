@@ -17,16 +17,15 @@ class SearchEngine:
     """
     def __init__(self, directory):
         """
-        Constructs an inverted index associating each term in the corpus
-        to the list of documents that contain the term.
+        Initializes the engine based on the directory provided.
         :param directory: A desired directory for the files.
         """
         self._inverted_index = {}
-        self._dir = directory
+        directory_loc = directory
         self._doc_count = 0
-        for filename in os.listdir(self._dir):
+        for filename in os.listdir(directory_loc):
             self._doc_count += 1
-            doc_path = os.path.join(self._dir, filename)
+            doc_path = os.path.join(directory_loc, filename)
             doc = Document(doc_path)
             for token in doc.get_words():
                 if token not in self._inverted_index:
@@ -51,6 +50,8 @@ class SearchEngine:
         :return: A list of document paths sorted in descending order
                 by tf–idf statistic; If there are no matching documents,
                 return an empty list.
+                The words will be normalized to be case-insensitive and
+                ignoring the punctuation.
         """
         result_dic = {}
         result = []

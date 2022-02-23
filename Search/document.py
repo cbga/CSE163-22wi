@@ -20,24 +20,26 @@ class Document:
         """
         self._file_path = doc_path
         self._dic = {}
-        self._word_count = 0
+        word_count = 0
         with open(doc_path) as doc:
             for line in doc.readlines():
                 for token in line.split():
                     token = token.lower()
                     token = re.sub(r'\W+', '', token)
-                    self._word_count += 1
+                    word_count += 1
                     if token not in self._dic:
                         self._dic[token] = 0
                     self._dic[token] += 1
         for string in self._dic.keys():
-            self._dic[string] /= self._word_count
+            self._dic[string] /= word_count
 
     def term_frequency(self, term):
         """
         :param term: A given term to be computed for TF.
         :return: The term frequency of the specified term; If term does
         not appear in the document, returns 0.
+        The words will be normalized to be case-insensitive and
+        ignoring the punctuation.
         """
         term = term.lower()
         term = re.sub(r'\W+', '', term)
