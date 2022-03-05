@@ -117,9 +117,9 @@ def plot_low_access_tracts(state_data):
     urban = state_data['Urban'] == 1
     rural_pl = state_data[rural]
     urban_pl = state_data[urban]
-    tot_rr = len(rural_pl)
-    tot_ub = len(urban_pl)
-    wa_data = state_data[(state_data['CensusTract'] != 'NaN') & (state_data['State'] == 'WA')]
+    tot_rr = rural_pl['POP2010']
+    tot_ub = urban_pl['POP2010']
+    wa_data = state_data.dropna()
     r_low_1 = rural_pl['lapop10'] >= 500
     r_low_2 = (rural_pl['lapop10'] / tot_rr) >= 0.33
     u_low_1 = urban_pl['lapophalf'] >= 500
@@ -127,8 +127,8 @@ def plot_low_access_tracts(state_data):
     fig, ax = plt.subplots(1)
     state_data.plot(ax=ax, color='#EEEEEE')
     wa_data.plot(ax=ax, color='#AAAAAA')
-    rural_pl[r_low_1 & r_low_2].plot(ax=ax)
-    urban_pl[u_low_1 & u_low_2].plot(ax=ax)
+    rural_pl[r_low_1 | r_low_2].plot(ax=ax)
+    urban_pl[u_low_1 | u_low_2].plot(ax=ax)
     plt.title('Low Access Census Tracts')
     plt.savefig('low_access.png')
 
@@ -139,11 +139,11 @@ def main():
         'food_access/food_access.csv'
     )
     print(percentage_food_data(state_data))
-    # plot_map(state_data)
-    # plot_population_map(state_data)
-    # plot_population_county_map(state_data)
-    # plot_food_access_by_county(state_data)
-    # plot_low_access_tracts(state_data)
+    plot_map(state_data)
+    plot_population_map(state_data)
+    plot_population_county_map(state_data)
+    plot_food_access_by_county(state_data)
+    plot_low_access_tracts(state_data)
 
 
 if __name__ == '__main__':
