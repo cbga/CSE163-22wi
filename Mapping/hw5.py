@@ -9,15 +9,7 @@ plot the previous by county;
 plot the food access through income levels;
 plot all low access tracts.
 """
-from ast import Try, walk
-from os import stat
-from termios import VMIN
-from threading import stack_size
-from time import process_time_ns
-from turtle import color, goto, st
-from unittest import result
 import geopandas as gpd
-from numpy import size, vsplit
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -31,7 +23,6 @@ def load_in_data(shp_file_name, csv_file_name):
     """
     census = gpd.read_file(shp_file_name)
     food_access = pd.read_csv(csv_file_name)
-    food_access['CensusTract'] = food_access['CensusTract']
     result = census.merge(food_access, left_on='CTIDFP00', right_on='CensusTract', how='left')
     return result
 
@@ -41,11 +32,9 @@ def percentage_food_data(state_data):
     Takes the merged data and returns the percentage of census
     tracts in Washington for which we have food access data. 
     """
-    have_data = state_data[state_data['CensusTract'] != 'NaN']
-    wa = have_data[have_data['State'] == 'WA']
-    size_all = have_data.shape[0]
-    size_wa = wa.shape[0]
-    return 100 * size_wa / size_all
+    have_data = state_data.dropna()
+    size_wa = len(have_data)
+    return 100 * size_wa / len(state_data)
 
 
 def plot_map(state_data):
@@ -150,11 +139,11 @@ def main():
         'food_access/food_access.csv'
     )
     print(percentage_food_data(state_data))
-    plot_map(state_data)
-    plot_population_map(state_data)
-    plot_population_county_map(state_data)
-    plot_food_access_by_county(state_data)
-    plot_low_access_tracts(state_data)
+    # plot_map(state_data)
+    # plot_population_map(state_data)
+    # plot_population_county_map(state_data)
+    # plot_food_access_by_county(state_data)
+    # plot_low_access_tracts(state_data)
 
 
 if __name__ == '__main__':
