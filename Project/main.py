@@ -1,19 +1,16 @@
-from ast import keyword
 import csv
-from email import header
-from os.path import exists
 import os
-from this import d
-import geopandas as gpd
-from matplotlib.pyplot import connect
+import nltk
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from nltk.sentiment import SentimentIntensityAnalyzer
 import pandas as pd
 import requests
-import json
-import datetime
-
+from os.path import exists
 
 os.environ['TOKEN'] = 'AAAAAAAAAAAAAAAAAAAAAHJRZQEAAAAA7dJCPjzhW7PhpmKz4EDKtga%2BmEQ%3DkwPq2w9tpjgMbPRYiYsH4rv2GV3tC0hSzP4Fk1WQ1zZ90OZHbt'
-
+nltk.download('vader_lexicon')
 
 def auth():
     return os.getenv('TOKEN')
@@ -24,14 +21,13 @@ def get_headers(token):
     return headers
 
 
-def get_url(result_num=10):
+def get_url(result_num=10, start_date='2022-03-03'):
     url = 'https://api.twitter.com/2/tweets/search/recent'
     params = {
-        "query":['covid -is:reply'],
+        "query":['covid -is:reply lang:en'],
+        'end_time': start_date + 'T09:25:07.000Z',
         'max_results': result_num,
-        'expansions': 'geo.place_id',
-        'tweet.fields': 'id,text,author_id,geo',
-        'place.fields': 'full_name,id,country,country_code,geo,name,place_type',
+        'tweet.fields': 'text,created_at',
         'next_token': {}
     }
     return url, params
@@ -46,64 +42,111 @@ def connect_to_endpoint(url, headers, params, next_token = None):
     return response.json()
 
 
-def get_data(tweet_num):
+def get_data(tweet_num, start_date):
     token = auth()
     headers = get_headers(token)
     target_num = tweet_num
-    url, params = get_url(target_num)
+    url, params = get_url(target_num, start_date)
     resp = connect_to_endpoint(url, headers, params)
+    # time.sleep(1)
     return resp
 
 
 def write_data_in_csv(j_content):
-    counter = 0
+    sia = SentimentIntensityAnalyzer()
     for tweet in j_content['data']:
-        id = tweet['id']
-        text = tweet['text']
-        if 'geo' in tweet:
-            geo = tweet['geo']['place_id']
-            coo = tweet['geo'].coordinates.coordinates
+        create_date = tweet['created_at'][:10]
+        content = tweet['text'].replace(',', ' ')
+        content_polar = sia.polarity_scores(content)
+        content_polar_compound = content_polar.get('compound')
+        if content_polar_compound >= 0:
+            attitude = 'NON_negative'
         else:
-            geo = ''
-            coo = ''
-        tweet_info = [id, text, geo, coo]
+            attitude = 'negative'
+        tweet_info = [create_date ,content, attitude]
         wt.writerow(tweet_info)
-        counter += 1
-    print('已收集数据：', counter)
-    f.close()
+    
 
 def init_csv_writer(path):
     global wt
     wt = csv.writer(path)
+    wt.writerow(['created_at', 'text', 'attitude'])
     
-
 
 def init_csv_file_and_writer(file_name):
     # Last change to input name
     global f
     if not exists(file_name):
         f = open(file_name, 'x', newline='')
-    f = open(file_name, 'a', newline='')
+    f = open(file_name, 'w', newline='')
     init_csv_writer(f)
 
 
-def process_data(dataframe):
-    return dataframe.dropna()
+ # Filter the daily new cases by the same date as the tweets
+def get_cases_by_day(df_cases):
+    df_cases = df_cases[['Date_reported', 'New_cases']]
+    df_cases = df_cases.groupby(by=['Date_reported']).sum()
+    df_cases = df_cases.loc['2022-03-03':'2022-03-08']
+    return df_cases
 
 
-def draw_density(file):
-    pass
+
+def get_alti_by_day(df_tweet):
+    tweet_inds = df_tweet.index.tolist()
+    res_dict = {}
+    for index in tweet_inds: 
+        if index not in res_dict.keys():
+            res_dict[index] = []
+            alts_for_ind_aday = df_tweet.loc[index, 'attitude']
+            for alt in alts_for_ind_aday:
+                res_dict[index].append(alt)
+    # percentage for non negative comments in all for the day
+    for day in res_dict.keys():
+        single = res_dict[day]
+        neg = 0
+        tot = 0
+        for sing_at in single:
+            if sing_at == 'NON_negative':
+                neg += 1
+            tot += 1
+        perc_neg = neg / tot
+        res_dict[day] = perc_neg
+    lsi = list(res_dict.items())
+    df_attitude_by_day = pd.DataFrame(lsi)
+    df_attitude_by_day.set_index([0], inplace=True)
+    return df_attitude_by_day
+
+
+def join_attitudes_and_cases(df_attitude, df_cases):
+    merged = df_cases.join(df_attitude, how='left')
+    merged = merged.rename(columns={1:'Non-negative Percent'})
+    return merged
+
+
+def visualize(df_final):
+    sns.lineplot(markers=True, data=df_final, x='New_cases', y='Non-negative Percent')
+    plt.title('Relationship Between Daily New Cases and Non-nagative Tweets about COVID-19', loc='center', wrap=True)
+    plt.savefig('relationship.png')
 
 
 def main():
+    df_cases = pd.read_csv('global-data-bycount.csv')
+    df_cases = get_cases_by_day(df_cases)
     csv_name = 'data.csv'
     init_csv_file_and_writer(csv_name)
-    wt.writerow(['id', 'text', 'geo', 'cood'])
-    net_data = get_data(100)
-    write_data_in_csv(net_data)
-    df = pd.read_csv(csv_name)
-    df = process_data(df)
-    print(df.head())
+    for date in df_cases.index.tolist():
+        write_data_in_csv(get_data(100, date))
+    print()
+    print('... Done writing data!')
+    print()
+    f.close()
+    df_tweet = pd.read_csv(csv_name)
+    df_tweet.set_index('created_at', inplace=True)
+    df_attitude = get_alti_by_day(df_tweet)
+    
+    joined_df = join_attitudes_and_cases(df_attitude, df_cases)
+    visualize(joined_df)
+
 
 if __name__ == '__main__':
     main()
