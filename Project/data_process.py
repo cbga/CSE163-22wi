@@ -7,6 +7,9 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 import pandas as pd
 import requests
 from os.path import exists
+# global variables across the files
+global wt
+global f
 
 
 def auth():
@@ -131,7 +134,8 @@ def visualize(df_final):
 def main():
     os.environ[
         'TOKEN'] = 'AAAAAAAAAAAAAAAAAAAAAHJRZQEAAAAA7dJCPjzhW7PhpmKz4EDKtga' \
-                   '%2BmEQ%3DkwPq2w9tpjgMbPRYiYsH4rv2GV3tC0hSzP4Fk1WQ1zZ90OZHbt'
+                   '%2BmEQ%3DkwPq2w9tpjgMbPRYiYsH4rv2GV3tC0hSzP4Fk1WQ1zZ90O' \
+                   'ZHbt'
     auth()
     nltk.download('vader_lexicon')
     df_cases = pd.read_csv('global-data-by-country-dat.csv')
