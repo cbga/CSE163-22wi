@@ -1,0 +1,77 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+
+\title{The Relationship between People's Comments about COVID-19 and Daily Cases}
+\author{Bingan Chen}
+
+
+\begin{document}
+\doublespacing
+
+\maketitle
+
+\section*{Summary of Questions and Results}
+\subsection*{Questions}
+\begin{enumerate}
+    \item What are the people's attitudes toward covid-19 recently?
+    \item How new cases about COVID increase by day?
+    \item What is the relationship between them, or, will people’s attitude be affected by the change of daily new cases?
+\end{enumerate}
+\subsection*{Result}
+\begin{enumerate}
+    \item The proportions of attitude of people toward covid-19 are almost distributed in a relatively stable way.
+    \item Cases are increasing a constant rate daily.
+    \item There is no obvious linear relationship between the attitudes' proportions and increase in covid cases.
+\end{enumerate}
+
+\section*{Motivation}
+In my downtime, I enjoy looking at social media like twitter to keep up with some of the real-time news and what people are saying about it. I suspect that many times the comments twitter tweets me are based on my own browsing preferences and browsing history, rather than a truly fair and comprehensive tweet. And it would be very time consuming and impractical to confirm this suspicion one by one using different accounts. As it happens, I learned the trick of working with \texttt{.csv} files in the 163 class. This gave me the idea to use these skills to prove my suspicions more effectively. The new crown virus is one of the most popular topics in the last two years. When I look at tweets on this topic, twitter's push mechanism tends to give me a strong preference for what I view. So I decided to use the official twitter api to extract a certain number of comments and use a machine learning model to evaluate the attitude of each tweet about covid. Since the number of new cases changes every day, I wanted to find out if the increase in cases would make the comments about covid on twitter more negative. That's why this project was done.
+
+\section*{Dataset}
+\begin{itemize}
+    \item The data gotten by Twitter API (\url{https://developer.twitter.com/en/docs/twitter-api})
+    \item Dataset from World Health Organization about the daily cases world-wide that are listed by date, country, etc.
+\end{itemize}
+
+\section*{Method}
+\begin{enumerate}
+    \item Use panda and DataFrame modification to summarize data from a messy condition that contains lots of useless data, to a organized dataset that contains only useful rows including country and increase cases by day. The index was set into each date.
+    \item The Twitter API was applied to get \texttt{.json} output for each individual Tweet.
+    \begin{enumerate}
+        \item Using the generated token to be able to use api and return multiple tweets using loop (each will be recorded as a single \texttt{response}). Specifically, the only data fields that are useful, and only the Tweets mentions the specific word \colorbox{lightgray}{covid}, which will be filter before download the data each time. I used \texttt{query} to achieve that goal.
+        \item All the information along with the following sentimental analysis results will be written into a new \texttt{.csv} file for further use. The format need to be adjusted to make the combination of data in the following steps.
+    \end{enumerate}
+    \item Use a pre trained Machine Learning Model to apply sentimental analysis to get the attitude for each individual sentences. The numerical value will be calculated while getting other information within the single Tweet \texttt{.json}. This column will be added to the \texttt{.csv} with tweet's data.
+    \item The cases data that has been filtered will be combined with the new \texttt{.csv} file by the shared index, the date.
+    \item Visualization:
+    \begin{enumerate}
+        \item The trend of cases in recent days per day is plotted using \texttt{lineplot} vs. time.
+        \item The daily change of attitude toward covid is plotted using \texttt{lineplot} vs. time
+        \item The relationship between the attitude and the new cases per day.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Results}
+
+
+\section*{Impact and Limitations}
+
+\section*{Challenge Goals}
+
+\section*{Work Plan Evaluation}
+
+\section*{Testing}
+
+\section*{Collaboration}
+
+
+\end{document}
