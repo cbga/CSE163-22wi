@@ -1,4 +1,6 @@
 import csv
+global f
+global wt
 
 
 def init(new_file='data.csv'):
