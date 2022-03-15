@@ -1,13 +1,6 @@
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
-
-
-def get_cases_by_day(df_cases):
-    df_cases = df_cases[['Date_reported', 'New_cases']]
-    df_cases = df_cases.groupby(by=['Date_reported']).sum()
-    df_cases = df_cases.loc['2022-03-07':'2022-03-13']
-    return df_cases
+from sklearn.linear_model import LinearRegression
 
 
 def get_attitude_by_day(df_tweet):
@@ -45,10 +38,50 @@ def final_combined_data(twitter_df, df_cases):
 
 
 def visualize(df_final):
-    sns.lineplot(markers=True, data=df_final, x='New_cases',
-                 y='Non-negative Percent')
+    print('Visualizing data... ')
+    bar_chart_attitudes(df_final)
+    bar_chart_cases(df_final)
+    relation_reg(df_final)
+    print('... visualizations finished.')
+
+
+def bar_chart_attitudes(df_final):
+    labels_attitude = df_final.index.values
+    attitudes = df_final['Non-negative Percent'].array
+    plt.bar(labels_attitude, attitudes)
+    plt.title('People\'s Attitudes Toward COVID-19')
+    plt.xlabel('Dates')
+    plt.ylabel('Non-negative Percent')
+    plt.savefig('output/attitudes.png')
+    print('attitudes graph saved.')
+    plt.close()
+
+
+def bar_chart_cases(df_final):
+    new_cases = df_final['New_cases'].array
+    labels_case = df_final.index.values
+    plt.bar(labels_case, new_cases)
+    plt.title('Increased COVID-19 Cases Globally')
+    plt.xlabel('Dates')
+    plt.ylabel('Cases')
+    plt.savefig('output/cases.png')
+    print('cases graph saved.')
+    plt.close()
+
+
+def relation_reg(df_final):
+    new_cases = df_final['New_cases'].array
+    regressor = LinearRegression()
+    X = new_cases.reshape(-1, 1)
+    y = df_final['Non-negative Percent'].array
+    regressor.fit(X, y)
+    y_predict = regressor.predict(X)
+    plt.scatter(X, y, color='blue')
+    plt.plot(X, y_predict, color='red')
     plt.title(
         'Relationship Between Daily New Cases and Non-negative Tweets about '
         'COVID-19',
         loc='center', wrap=True)
-    plt.savefig('relationship.png')
+    plt.savefig('output/relationship.png')
+    print('relationship graph saved.')
+    plt.close()

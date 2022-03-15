@@ -21,7 +21,6 @@ def main():
     df_tweet = pd.read_csv(twitter_data_csv)
     joined_df = process_visualize.final_combined_data(
         df_tweet, cases_shrinked_df)
-    print(joined_df)
     process_visualize.visualize(joined_df)
 
 
