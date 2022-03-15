@@ -8,6 +8,7 @@ You need the following `Python` libraries:
 - `requests`
 - `matplotlib`
 - `sklearn`
+
 If you don't have any of those libraries, download them directly in Anaconda or over
 ```bash
 pip install <LIBRARY-NAME>
