@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.13)  14 MAR 2022 22:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.13)  14 MAR 2022 23:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -357,19 +357,19 @@ Overfull \hbox (24.0996pt too wide) in paragraph at lines 48--49
 File: cases.png Graphic file (type png)
 <use cases.png>
 Package pdftex.def Info: cases.png  used on input line 73.
-(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
+(pdftex.def)             Requested size: 277.51894pt x 208.13919pt.
 <attitudes.png, id=51, 462.528pt x 346.896pt>
 File: attitudes.png Graphic file (type png)
 <use attitudes.png>
 Package pdftex.def Info: attitudes.png  used on input line 77.
-(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
- [4 <./cases.png>]
-<relationship.png, id=61, 462.528pt x 346.896pt>
+(pdftex.def)             Requested size: 277.51894pt x 208.13919pt.
+ [4 <./cases.png> <./attitudes.png>]
+<relationship.png, id=62, 462.528pt x 346.896pt>
 File: relationship.png Graphic file (type png)
 <use relationship.png>
 Package pdftex.def Info: relationship.png  used on input line 81.
 (pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
- [5 <./attitudes.png>] [6 <./relationship.png>] [7]
+ [5 <./relationship.png>] [6]
 Overfull \hbox (18.249pt too wide) in paragraph at lines 108--109
 []\OT1/cmr/m/n/12 Another im-por-tant part is to prop-erly join the DataFrames. I used \OT1/cmtt/m/n/12 assert[]equals()
  []
@@ -379,23 +379,23 @@ Overfull \hbox (5.38058pt too wide) in paragraph at lines 112--113
 []\OT1/cmr/m/n/12 Twitter of-fi-cial doc-u-ment for \OT1/cmtt/m/n/12 https://api.twitter.com/2/tweets/search/recent 
  []
 
-[8] (./report.aux)
+[7] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 10508 strings out of 478276
- 166757 string characters out of 5850489
+ 10507 strings out of 478276
+ 166751 string characters out of 5850489
  484644 words of memory out of 5000000
  28547 multiletter control sequences out of 15000+600000
  474732 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,6n,63p,1294b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on report.pdf (8 pages, 125183 bytes).
+Output written on report.pdf (7 pages, 124652 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
- 40 named destinations out of 1000 (max. 500000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
+ 39 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
