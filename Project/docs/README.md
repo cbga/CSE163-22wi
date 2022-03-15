@@ -14,11 +14,9 @@ If you don't have any of those libraries, download them directly in Anaconda or 
 pip install <LIBRARY-NAME>
 ```
 ## How to run
-1. Download `main.py`, `process_visualize.py`, `use_api_preprocess.py`, `settings.py` to your local directory.
+1. Copy  `main.py`, `process_visualize.py`, `use_api_preprocess.py`, `settings.py` , `test.py`, `cse163_utils.py`, `test_files.zip`  (the last three are only for tests), create an empty folder `/output` to your local directory. Decompress `test_files.zip`.
 2. [Click here](https://covid19.who.int/WHO-COVID-19-global-data.csv) to download `WHO-COVID-19-global-data.csv`. (be sure to download it every new day before you run the `.py` files and replace the old one if you have run this project before)
-
-3. Create a new folder under the same directory as `output` to store the output images.
-4. In `use_api_preprocess.py`, scroll down and you will see some lines like this:
+3. In `use_api_preprocess.py`, scroll down and you will see some lines like this:
     ```python
     # ----------------------------------------
     # CHANGE start_day
@@ -28,8 +26,8 @@ pip install <LIBRARY-NAME>
     # ----------------------------------------
     ```
     Change `end_day` into the day before you run this project; Change `start_day` into the **5th day** before the `end_day`. Both should be in the format as the sample above In the sample case, the 5th day before `end_day` (Mar 13, 2022) is Mar 8, 2022.
-5. Make sure you are connected to internet while running this project.
-6. Open and run **`main.py` file*** under the environment with all required libraries. All images generated will be saved in `/output` subdirectory with proper names.
+4. Make sure you are connected to internet while running this project.
+5. Open and run **`main.py` file*** under the environment with all required libraries. All images generated will be saved in `/output` subdirectory with proper names.
 
 ---
 
