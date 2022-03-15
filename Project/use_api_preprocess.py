@@ -75,9 +75,9 @@ def add_tweets_data_to_cases():
     df_cases = pd.read_csv('WHO-COVID-19-global-data.csv')
     # ----------------------------------------
     # CHANGE start_day
-    start_day = '2022-03-08'
+    start_day = '2022-03-09'
     # CHANGE end_day
-    end_day = '2022-03-13'
+    end_day = '2022-03-14'
     # ----------------------------------------
     df_cases_shrinked = get_cases_by_day(df_cases, start_day, end_day)
     for date in df_cases_shrinked.index.tolist():
