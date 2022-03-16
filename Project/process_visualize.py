@@ -40,7 +40,7 @@ def final_combined_data(twitter_df, df_cases):
 def visualize(df_final):
     print('Visualizing data... ')
     bar_chart_attitudes(df_final)
-    bar_chart_cases(df_final)
+    line_cases(df_final)
     relation_reg(df_final)
     print('... visualizations finished.')
 
@@ -57,10 +57,10 @@ def bar_chart_attitudes(df_final):
     plt.close()
 
 
-def bar_chart_cases(df_final):
+def line_cases(df_final):
     new_cases = df_final['New_cases'].array
     labels_case = df_final.index.values
-    plt.bar(labels_case, new_cases)
+    plt.plot(labels_case, new_cases)
     plt.title('Increased COVID-19 Cases Globally')
     plt.xlabel('Dates')
     plt.ylabel('Cases')

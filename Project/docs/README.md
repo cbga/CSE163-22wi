@@ -14,7 +14,7 @@ If you don't have any of those libraries, download them directly in Anaconda or 
 pip install <LIBRARY-NAME>
 ```
 ## How to run
-1. Copy  `main.py`, `process_visualize.py`, `use_api_preprocess.py`, `settings.py` , `test.py`, `cse163_utils.py`, `test_files.zip`  (the last three are only for tests), create an empty folder `/output` to your local directory. Decompress `test_files.zip`.
+1. Copy  `main.py`, `process_visualize.py`, `use_api_preprocess.py`, `settings.py` , `test.py`, `cse163_utils.py`, `test_files.zip`  (the last three are only for tests), create an empty folder `output` to your local directory. Decompress `test_files.zip`.
 2. [Click here](https://covid19.who.int/WHO-COVID-19-global-data.csv) to download `WHO-COVID-19-global-data.csv`. (be sure to download it every new day before you run the `.py` files and replace the old one if you have run this project before)
 3. In `use_api_preprocess.py`, scroll down and you will see some lines like this:
     ```python
