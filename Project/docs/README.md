@@ -1,4 +1,4 @@
-# Instructions
+# Instructions for Simple Proj
 
 ## Requirement
 You need the following `Python` libraries:
